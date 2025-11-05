@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feature/**
+      - tag/**
   pull_request:
     branches:
       - main
