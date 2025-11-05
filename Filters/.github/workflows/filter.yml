@@ -1,29 +1,25 @@
-name: My npm package workflow
+name: 06 Context
+
 on:
   push:
-    branches:
-      - main
-      - feature/**
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 jobs:
-  build:
+  echo-data:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: npm install
-      - name: Run tests
-        run: npm test
-      - name: Build package
-        run: npm run build
-      - name: Publish to npm
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Echo data
+        run: |
+          echo "This is a test workflow for context filtering.${{github.event_name}}"
+          echo "Repository: ${{github.repository}}"
+          echo "Ref: ${{github.ref}}"
+          echo "Actor: ${{github.actor}}"
+          echo "SHA: ${{github.sha}}"
+          echo "Event Path: ${{github.event_path}}"
+          echo "Workflow: ${{github.workflow}}"
+          echo "Job: ${{github.job}}"
+          echo "Run ID: ${{github.run_id}}"
+          echo "Run Number: ${{github.run_number}}"
+      - name: Variable listing
+        run: |
+           echo "Listing all environment variables ${{ vars.* }}"
+          
