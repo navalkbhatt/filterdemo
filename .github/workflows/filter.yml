@@ -1,0 +1,25 @@
+name: 06 Context
+
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  echo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo data
+        run: |
+          echo "This is a test workflow for context filtering.${{github.event_name}}"
+          echo "Repository: ${{github.repository}}"
+          echo "Ref: ${{github.ref}}"
+          echo "Actor: ${{github.actor}}"
+          echo "SHA: ${{github.sha}}"
+          echo "Event Path: ${{github.event_path}}"
+          echo "Workflow: ${{github.workflow}}"
+          echo "Job: ${{github.job}}"
+          echo "Run ID: ${{github.run_id}}"
+          echo "Run Number: ${{github.run_number}}"
+      - name: Variable listing
+        run: |
+           echo "Listing all environment variables ${{ vars.* }}"
+          
